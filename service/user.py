@@ -17,7 +17,7 @@ class UserService:
 
 
     def get_all(self):
-        return self.dao.get_all() #доработать
+        return self.dao.get_all()
 
 
     def get_user_by_username(self, username):
@@ -25,10 +25,12 @@ class UserService:
 
 
     def create(self, user_d):
+        user_d["password"] = self.make_user_password_hash(user_d["password"])
         return self.dao.create(user_d)
 
 
     def update(self, user_d):
+        user_d["password"] = self.make_user_password_hash(user_d.get("password"))
         self.dao.update(user_d)
         return self.dao
 
@@ -43,3 +45,5 @@ class UserService:
 
     def compare_password(self, password_hash, other_password) -> bool:
         return hmac.compare_digest(base64.b64decode(password_hash), hashlib.pbkdf2_hmac('sha256', other_password.encode('utf-8'), PWD_HASH_SALT, PWD_HASH_ITERATIONS))
+
+

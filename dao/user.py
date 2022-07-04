@@ -12,27 +12,16 @@ class UserDAO:
         """Получить одного поль. по id: uid"""
         return self.session.query(User).get(uid)
 
+    
     def get_all(self):
-        """Получить всех поль."""
+        """Получить юзеров"""
         return self.session.query(User).all()
 
-    def get_user_by_username(self, val: str):
+
+
+    def get_user_by_username(self, username):
         """Получить поль. по имени"""
-        return self.session.query(User).filter(User.username == val).first()
-
-
-    def get_user_admin(self, val: str, filters):
-        """Получить роль поль."""
-        try:
-            u = self.session.query(User).get(val)
-            if "role" in filters:
-                u = u.filter(User.role == filters.get("admin"))
-            elif "role" in filters:
-                u = u.filter(User.role == filters.get("user"))
-            return u.all()
-        except Exception as e:
-            print("User roles Exception", e)
-            raise abort(401)
+        return self.session.query(User).filter(User.username == username).one()
 
 
     def create(self, user):

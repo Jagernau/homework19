@@ -16,7 +16,7 @@ class UsersView(Resource):
         return res, 200
 
 
-#    @admin_required
+    @admin_required
     def post(self):
         req_json = request.json
         user = user_service.create(req_json)

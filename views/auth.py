@@ -14,10 +14,10 @@ class AuthView(Resource):
         req_json = request.json
         username = req_json.get('username')
         password = req_json.get('password')
-        if not (username or password):
+        if not (username and password):
             return "Нужно имя и пароль", 400
         tokens = auth_service.generate_tokens(username, password)
-        if tokens:
+        if tokens != False:
             return tokens
         else:
             return "Ошибка в запросе", 400

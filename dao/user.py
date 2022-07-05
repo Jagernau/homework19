@@ -21,7 +21,7 @@ class UserDAO:
 
     def get_user_by_username(self, username):
         """Получить поль. по имени"""
-        return self.session.query(User).filter(User.username == username).one()
+        return self.session.query(User).filter(User.username == username).first()
 
 
     def create(self, user):

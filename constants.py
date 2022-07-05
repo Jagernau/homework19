@@ -1,4 +1,4 @@
-PWD_HASH_SALT = b'secret_here'
+PWD_HASH_SALT = b'secret'
 PWD_HASH_ITERATIONS = 100_000
 SECRET_KEY = 'decorators'
 ALGORITM = 'HS256'
